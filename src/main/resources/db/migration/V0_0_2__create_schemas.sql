@@ -1,2 +1,2 @@
 alter table subjects
-    add constraint unique_name UNIQUE (name)
+    add constraint unique_name UNIQUE (name);

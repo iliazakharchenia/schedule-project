@@ -3,7 +3,7 @@ create table lessons
 	id serial not null
 		constraint lessons_pk
 			primary key,
-	day pg_enum not null
+	day date not null
 );
 
 create table subjects

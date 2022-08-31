@@ -3,8 +3,9 @@ package com.scheduleproject.entities;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Getter
 @Setter
@@ -18,11 +19,15 @@ public class Lesson {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private DayOfWeek day;
+    private LocalDate day;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Subject subject;
 
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Student> students;
+
+    public Lesson(LocalDate day, Subject subject, List<Student> students) {
+
+    }
 }
