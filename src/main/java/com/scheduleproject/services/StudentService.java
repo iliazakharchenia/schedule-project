@@ -24,8 +24,9 @@ public class StudentService {
     private final ModelMapper mapper;
 
     @Transactional
-    public Student create(StudentDtoRequest studentReq) {
-        return studentRepository.save(mapper.map(studentReq, Student.class));
+    public StudentDtoResponse create(StudentDtoRequest studentReq) {
+        return mapper.map(studentRepository.save(mapper.map(studentReq, Student.class)),
+                StudentDtoResponse.class);
     }
 
     public List<StudentDtoResponse> getAll() {
@@ -38,30 +39,12 @@ public class StudentService {
         return mapper.map(studentRepository.getReferenceById(id), StudentDtoResponse.class);
     }
 
-    public Student get(StudentDtoResponse studentDtoResp) {
-        return mapper.map(studentRepository.getReferenceById(studentDtoResp.getId()), Student.class);
-    }
-
-    public Student getById(Integer studentId) {
-        return studentRepository.getReferenceById(studentId);
-    }
-
     @Transactional
     public StudentDtoResponse update(StudentDtoResponse studentDtoResp) {
         Student student = studentRepository.getReferenceById(studentDtoResp.getId());
         student.setName(studentDtoResp.getName());
         student.setSurname(studentDtoResp.getSurname());
         return mapper.map(student, StudentDtoResponse.class);
-    }
-
-    @Transactional
-    public void delete(Student student) {
-        studentRepository.delete(student);
-    }
-
-    @Transactional
-    public void delete(StudentDtoResponse studentDtoResp) {
-        studentRepository.deleteById(studentDtoResp.getId());
     }
 
     @Transactional

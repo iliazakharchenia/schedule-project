@@ -18,14 +18,9 @@ import java.util.stream.Collectors;
 public class SubjectsController {
     private final SubjectService service;
 
-    @Autowired
-    private final ModelMapper modelMapper;
-
     @GetMapping
     public List<SubjectDtoResponse> getAll() {
-        return service.getAll().stream()
-                .map(el->modelMapper.map(el,SubjectDtoResponse.class))
-                .collect(Collectors.toList());
+        return service.getAll();
     }
 
     @GetMapping("/subject/{id}")
@@ -44,7 +39,7 @@ public class SubjectsController {
     }
 
     @PostMapping("/add")
-    public Subject add(SubjectDtoRequest subjectDtoReq) {
+    public SubjectDtoResponse add(SubjectDtoRequest subjectDtoReq) {
         return service.create(subjectDtoReq);
     }
 }

@@ -1,18 +1,39 @@
 package com.scheduleproject.controllers;
 
-import com.scheduleproject.services.SubjectService;
+import com.scheduleproject.dto.request.LessonDtoRequest;
+import com.scheduleproject.dto.response.LessonDtoResponse;
+import com.scheduleproject.entities.Student;
+import com.scheduleproject.services.LessonService;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @RestController
-@RequestMapping("subjects")
+@RequestMapping("lessons")
 @RequiredArgsConstructor
 public class LessonsController {
-    private final SubjectService service;
+    private final LessonService service;
 
-    @Autowired
-    private final ModelMapper modelMapper;
+    @PostMapping("/add")
+    public LessonDtoResponse add(LessonDtoRequest lessonDtoReq) {
+        return service.create(lessonDtoReq);
+    }
+
+    @GetMapping("/lesson/{id}")
+    public LessonDtoResponse get(@PathVariable Integer id) {
+        return service.get(id);
+    }
+
+    @GetMapping
+    public List<LessonDtoResponse> getSchedule(@RequestBody Integer studentId,
+                                               @RequestBody LocalDate date) {
+        return service.getAllBy(studentId, date);
+    }
+
+    @DeleteMapping("/lesson/{id}")
+    public void delete(@PathVariable Integer id) {
+        service.delete(id);
+    }
 }

@@ -28,6 +28,8 @@ public class Lesson {
     private List<Student> students;
 
     public Lesson(LocalDate day, Subject subject, List<Student> students) {
-
+        this.day = day;
+        this.subject = subject;
+        this.students = students;
     }
 }

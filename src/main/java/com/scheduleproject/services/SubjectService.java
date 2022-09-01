@@ -24,8 +24,9 @@ public class SubjectService {
     private final ModelMapper mapper;
 
     @Transactional
-    public Subject create(SubjectDtoRequest subjectDtoReq) {
-        return subjectRepository.save(mapper.map(subjectDtoReq, Subject.class));
+    public SubjectDtoResponse create(SubjectDtoRequest subjectDtoReq) {
+        return mapper.map(subjectRepository.save(mapper.map(subjectDtoReq, Subject.class)),
+                SubjectDtoResponse.class);
     }
 
     public List<SubjectDtoResponse> getAll() {
@@ -36,18 +37,6 @@ public class SubjectService {
 
     public SubjectDtoResponse get(Integer id) {
         return mapper.map(subjectRepository.getReferenceById(id), SubjectDtoResponse.class);
-    }
-
-    public Subject get(SubjectDtoResponse subjectDtoResp) {
-        return subjectRepository.getReferenceById(subjectDtoResp.getId());
-    }
-
-    public void delete(Subject subject) {
-        subjectRepository.delete(subject);
-    }
-
-    public void delete(SubjectDtoResponse subjectDtoResp) {
-        subjectRepository.deleteById(subjectDtoResp.getId());
     }
 
     public void delete(Integer subjectId) {

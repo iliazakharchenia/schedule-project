@@ -2,7 +2,6 @@ package com.scheduleproject.controllers;
 
 import com.scheduleproject.dto.request.StudentDtoRequest;
 import com.scheduleproject.dto.response.StudentDtoResponse;
-import com.scheduleproject.entities.Student;
 import com.scheduleproject.services.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -18,14 +17,9 @@ import java.util.stream.Collectors;
 public class StudentsController {
     private final StudentService service;
 
-    @Autowired
-    private final ModelMapper modelMapper;
-
     @GetMapping
     public List<StudentDtoResponse> getAll() {
-        return service.getAll().stream()
-                .map(el->modelMapper.map(el,StudentDtoResponse.class))
-                .collect(Collectors.toList());
+        return service.getAll();
     }
 
     @GetMapping("/student/{id}")
@@ -44,7 +38,7 @@ public class StudentsController {
     }
 
     @PostMapping("/add")
-    public Student add(StudentDtoRequest studentDtoReq) {
+    public StudentDtoResponse add(StudentDtoRequest studentDtoReq) {
         return service.create(studentDtoReq);
     }
 }
