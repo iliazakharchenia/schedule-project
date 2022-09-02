@@ -13,8 +13,6 @@ public class ScheduleProjectApplication {
 	}
 
 	public static void main(String[] args) {
-		//DockerPostgresContainer postgresContainer = new DockerPostgresContainer();
-		//postgresContainer.start();
 		SpringApplication.run(ScheduleProjectApplication.class, args);
 	}
 

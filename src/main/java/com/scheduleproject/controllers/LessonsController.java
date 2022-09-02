@@ -31,6 +31,11 @@ public class LessonsController {
         return service.getAllBy(studentId, date);
     }
 
+    @PostMapping("/lesson")
+    public LessonDtoResponse update(@RequestBody LessonDtoResponse lessonDtoResponse) {
+        return service.update(lessonDtoResponse);
+    }
+
     @DeleteMapping("/lesson/{id}")
     public void delete(@PathVariable Integer id) {
         service.delete(id);

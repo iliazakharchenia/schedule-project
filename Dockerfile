@@ -1,10 +1,7 @@
-FROM maven:3.8.2-jdk-8
-WORKDIR /schedule-project
-COPY . .
-RUN mvn clean install
-CMD mvn spring-boot:run
+FROM maven:3.8.2-jdk-11 AS MAVEN_BUILD
+COPY ./ ./
+RUN mvn clean package
 
-#FROM adoptopenjdk:11-jre-hotspot
-#ARG WAR_FILE=*.jar
-#COPY ${WAR_FILE} application.jar
-#ENTRYPOINT ["java", "-jar", "application.jar"]
+FROM openjdk:11-jre-slim-stretch
+COPY --from=MAVEN_BUILD /target/schedule-project-0.0.1-SNAPSHOT.jar /demo.jar
+CMD ["java","-jar","/demo.jar"]
