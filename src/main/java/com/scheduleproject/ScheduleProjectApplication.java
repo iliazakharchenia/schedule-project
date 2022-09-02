@@ -1,6 +1,5 @@
 package com.scheduleproject;
 
-import com.scheduleproject.containers.DockerPostgresContainer;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,8 +13,8 @@ public class ScheduleProjectApplication {
 	}
 
 	public static void main(String[] args) {
-		DockerPostgresContainer postgresContainer = new DockerPostgresContainer();
-		postgresContainer.start();
+		//DockerPostgresContainer postgresContainer = new DockerPostgresContainer();
+		//postgresContainer.start();
 		SpringApplication.run(ScheduleProjectApplication.class, args);
 	}
 
