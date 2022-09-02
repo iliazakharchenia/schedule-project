@@ -1,15 +1,18 @@
 package com.scheduleproject.dto.response;
 
-import lombok.Data;
+import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class LessonDtoResponse implements Serializable {
-    private final Integer id;
-    private final LocalDate day;
-    private final SubjectDtoResponse subject;
-    private final List<StudentDtoResponse> students;
+    private Integer id;
+    private LocalDate day;
+    private SubjectDtoResponse subject;
+    private List<StudentDtoResponse> students;
 }

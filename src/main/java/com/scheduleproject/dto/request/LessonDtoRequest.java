@@ -1,20 +1,23 @@
 package com.scheduleproject.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Data;
+import lombok.*;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class LessonDtoRequest implements Serializable {
     @NotNull(message = "Should be not null")
     @JsonFormat(pattern="yyyy-MM-dd")
-    private final LocalDate day;
+    private LocalDate day;
     @NotNull(message = "Should be not null")
-    private final Integer subjectId;
+    private Integer subjectId;
     @NotNull(message = "Should be not null")
-    private final List<Integer> studentsIds;
+    private List<Integer> studentsIds;
 }

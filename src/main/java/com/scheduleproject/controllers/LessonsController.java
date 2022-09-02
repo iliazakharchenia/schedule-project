@@ -2,7 +2,6 @@ package com.scheduleproject.controllers;
 
 import com.scheduleproject.dto.request.LessonDtoRequest;
 import com.scheduleproject.dto.response.LessonDtoResponse;
-import com.scheduleproject.entities.Student;
 import com.scheduleproject.services.LessonService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +26,7 @@ public class LessonsController {
     }
 
     @GetMapping
-    public List<LessonDtoResponse> getSchedule(@RequestBody Integer studentId,
+    public List<LessonDtoResponse> getLessons(@RequestBody Integer studentId,
                                                @RequestBody LocalDate date) {
         return service.getAllBy(studentId, date);
     }

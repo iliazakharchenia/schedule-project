@@ -21,6 +21,6 @@ public class Student {
 
     private String surname;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "students")
     private List<Lesson> lessons;
 }

@@ -1,11 +1,14 @@
 package com.scheduleproject.dto.response;
 
-import lombok.Data;
+import lombok.*;
 
 import java.io.Serializable;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class SubjectDtoResponse implements Serializable {
-    private final Integer id;
-    private final String name;
+    private Integer id;
+    private String name;
 }

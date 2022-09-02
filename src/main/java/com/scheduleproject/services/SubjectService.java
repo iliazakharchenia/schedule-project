@@ -46,6 +46,7 @@ public class SubjectService {
     public SubjectDtoResponse update(SubjectDtoResponse subjectDtoResp) {
         Subject subject = subjectRepository.getReferenceById(subjectDtoResp.getId());
         subject.setName(subjectDtoResp.getName());
+        subjectRepository.save(subject);
         return mapper.map(subject, SubjectDtoResponse.class);
     }
 }

@@ -5,13 +5,12 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Entity(name = "lesson")
 @ToString(of = {"id", "day"})
 @Table(name = "\"lessons\"")
 public class Lesson {
@@ -21,10 +20,10 @@ public class Lesson {
 
     private LocalDate day;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Subject subject;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Student> students;
 
     public Lesson(LocalDate day, Subject subject, List<Student> students) {

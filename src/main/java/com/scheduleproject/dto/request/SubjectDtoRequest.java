@@ -1,14 +1,17 @@
 package com.scheduleproject.dto.request;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class SubjectDtoRequest implements Serializable {
     @NotNull(message = "Should be not null")
     @Size(min = 1, max = 21, message = "Length can't be =>1 or =<21")
-    private final String name;
+    private String name;
 }

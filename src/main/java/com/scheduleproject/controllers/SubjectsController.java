@@ -2,15 +2,11 @@ package com.scheduleproject.controllers;
 
 import com.scheduleproject.dto.request.SubjectDtoRequest;
 import com.scheduleproject.dto.response.SubjectDtoResponse;
-import com.scheduleproject.entities.Subject;
 import com.scheduleproject.services.SubjectService;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("subjects")

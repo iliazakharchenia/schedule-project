@@ -4,12 +4,9 @@ import com.scheduleproject.dto.request.StudentDtoRequest;
 import com.scheduleproject.dto.response.StudentDtoResponse;
 import com.scheduleproject.services.StudentService;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("students")
@@ -38,7 +35,7 @@ public class StudentsController {
     }
 
     @PostMapping("/add")
-    public StudentDtoResponse add(StudentDtoRequest studentDtoReq) {
+    public StudentDtoResponse add(@RequestBody StudentDtoRequest studentDtoReq) {
         return service.create(studentDtoReq);
     }
 }

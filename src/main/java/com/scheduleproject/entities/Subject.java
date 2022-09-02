@@ -19,6 +19,6 @@ public class Subject {
 
     private String name;
 
-    @OneToMany(cascade = {CascadeType.REMOVE, CascadeType.DETACH}, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "subject")
     private List<Lesson> lessons;
 }

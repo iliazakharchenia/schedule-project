@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,6 +45,7 @@ public class StudentService {
         Student student = studentRepository.getReferenceById(studentDtoResp.getId());
         student.setName(studentDtoResp.getName());
         student.setSurname(studentDtoResp.getSurname());
+        studentRepository.save(student);
         return mapper.map(student, StudentDtoResponse.class);
     }
 

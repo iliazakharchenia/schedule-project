@@ -22,6 +22,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -41,9 +42,7 @@ public class LessonService {
         List<Student> students = studentRepository.findAllById(lessonDtoReq.getStudentsIds());
         Optional<Subject> subject = subjectRepository.findById(lessonDtoReq.getSubjectId());
         if (subject.isPresent())
-            return mapper.map(
-                    lessonRepository.save(new Lesson(lessonDtoReq.getDay(), subject.get(), students)),
-                    LessonDtoResponse.class);
+            return get(lessonRepository.save(new Lesson(lessonDtoReq.getDay(), subject.get(), students)).getId());
         else throw new NoEntityByIdException("No subject entity with id="+
                 lessonDtoReq.getSubjectId());
     }
@@ -58,8 +57,19 @@ public class LessonService {
                 studentDtosResp);
     }
 
+    @Transactional
+    public LessonDtoResponse update(LessonDtoResponse response) {
+        Lesson lesson = lessonRepository.getReferenceById(response.getId());
+        lesson.setDay(response.getDay());
+        lesson.setSubject(mapper.map(response.getSubject(), Subject.class));
+        lesson.setStudents(response.getStudents().stream().map(el->mapper.map(el, Student.class))
+                .collect(Collectors.toList()));
+        lessonRepository.save(lesson);
+        return get(lesson.getId());
+    }
+
     public List<LessonDtoResponse> getAllBy(Integer studentId, LocalDate date) {
-        List<Lesson> lessons = lessonRepository.getLessonsBy(date,
+        List<Lesson> lessons = lessonRepository.getLessonsByDayAndStudentsContaining(date,
                 studentRepository.getReferenceById(studentId));
         List<LessonDtoResponse> lessonsDtosResp = new ArrayList<>();
         lessons.forEach(el->lessonsDtosResp.add(
